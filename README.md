@@ -9,5 +9,7 @@ Then add the project to Tomcat9.0 server in eclipse, launch Tomcat with any port
 Access this URL http://localhost:8080/simple_webdav_servlet/SimpleWebDAVServlet/ with Web browser or WebDAV client.
 Login with default a user account either user1/pass1 or user2/pass2 and you can see the local files from WebDAV view.
 
+![Demo](https://github.com/tanakamshr/simple_webdav_servlet/blob/master/demo_screenshot.png)
+
 ## How to Import SimpleWebDAVServlet to Other Web Apps
 Just copy SimpleWebDAVServlet.java to other Java Web applications and make it work. This servlet class does not require any third party libraries.
