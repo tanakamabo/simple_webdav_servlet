@@ -6,6 +6,9 @@ This source code is intended to be build with Eclipse IDE.
 Please clone this repository inside an Eclipse workspace directory and import the simple_webdav_servlet project.
 Open the SimpleWebDAVServlet.java file with editor and modify BASE_PATH with a certain directory.
 Then add the project to Tomcat9.0 server in eclipse, launch Tomcat with any port such as 8080.
+
+![Eclipse](https://github.com/tanakamshr/simple_webdav_servlet/blob/master/eclipse_screenshot.png)
+
 Access this URL http://localhost:8080/simple_webdav_servlet/SimpleWebDAVServlet/ with Web browser or WebDAV client.
 Login with default a user account either user1/pass1 or user2/pass2 and you can see the local files from WebDAV view.
 
