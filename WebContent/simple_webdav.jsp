@@ -1,3 +1,5 @@
+<%@page import="webdav.SimpleWebDAVServlet"%>
+<%
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -14,57 +16,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package webdav;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.nio.file.DirectoryIteratorException"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.nio.file.attribute.BasicFileAttributes"%>
+<%@page import="java.nio.file.Files"%>
+<%@page import="java.nio.file.DirectoryStream"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.nio.file.Path"%>
+<%@page import="java.io.File"%>
+<%@page import="java.nio.charset.Charset"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.HashSet"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
 /**
- * A simple WebDAV servlet class for Local disk storage.
+ * A simple WebDAV servlet jsp file for Local disk storage. This file is made from SimpleWebDAVServlet but it is independent of the class in terms of this file's portability.
+ * This jsp file needs to be invoked with a certain path defined in web.xml since jsp file cannot receive path parameter like php.
  * This class is intended to be modified directly such as local base directory path(BASE_PATH field), 
  * WebDAV user accounts(accounts field), servlet mapping(WebServlet annotation) and Web UI for practical use.
  * This servlet can be used from Web browsers and WebDAV clients for normal use since it supports only OPTIONS, GET, HEAD, PUT, DELETE, MKCOL methods.
  * This servlet is only tested on Windows, but this generalizes file path delimiters and may work easily other operating systems.
  * @author tanakamabo
  */
-@WebServlet("/SimpleWebDAVServlet/*")
-public class SimpleWebDAVServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+class SimpleWebDAVServlet extends HttpServlet {
+	final long serialVersionUID = 1L;
 	/**
 	 * Base path of target disk. The default value must be changed.
 	 */
-	private static final String BASE_PATH = "C:\\mustchange";
+	final String BASE_PATH = "C:\\mustchange";
 	/**
 	 * Account list of this WebDAV service. 
 	 */
-	private static Set<String> accounts = new HashSet<String>(Arrays.asList(
+	Set<String> accounts = new HashSet<String>(Arrays.asList(
 			"user1:pass1",
 			"user2:pass2"
 			));
@@ -133,7 +129,7 @@ public class SimpleWebDAVServlet extends HttpServlet {
 		super.service(req, resp);
 	}
     
-    private static void flushStream(InputStream is, OutputStream os) throws IOException {
+    void flushStream(InputStream is, OutputStream os) throws IOException {
 		int len;
 		byte[] buf = new byte[1024];
 		while ((len = is.read(buf)) != -1) {
@@ -458,3 +454,6 @@ public class SimpleWebDAVServlet extends HttpServlet {
 	}
 
 }
+SimpleWebDAVServlet servlet = new SimpleWebDAVServlet();
+servlet.service(request, response);
+ %>
